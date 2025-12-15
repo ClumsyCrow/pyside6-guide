@@ -72,8 +72,8 @@ class MainWindow(QMainWindow):
     # Gets user's name and greets them
     def get_greeting(self):
         username = self.username_input.text()
-        user_last_name = self.user_last_name_input
-        greeting = f"Hi {username}!"
+        user_last_name = self.user_last_name_input.text()
+        greeting = f"Hi {username} {user_last_name}!"
         if username == "":
             greeting = f"You didn't enter a first name, silly!"
             self.greeting_label.setText(greeting)
@@ -83,10 +83,12 @@ class MainWindow(QMainWindow):
         else:
             self.greeting_label.setText(greeting)
     
+    # Sets values to their default
     def clear_board(self):
         reset_greeting = self.greeting_label_default
         self.greeting_label.setText(reset_greeting)
         self.username_input.clear()
+        self.user_last_name_input.clear()
 
 
 if __name__ == "__main__":
