@@ -10,7 +10,10 @@ from PySide6.QtWidgets import (
     QLabel,
     QMainWindow,
     QVBoxLayout,
+    QHBoxLayout,
     QWidget,
+    QSpinBox,
+    QDoubleSpinBox,
 )
 
 
@@ -18,7 +21,7 @@ class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
 
-        self.setWindowTitle("Window Title")
+        self.setWindowTitle("Accurate Tip Addition")
         self.setContentsMargins(12, 12, 12, 12)
         self.resize(320, 240)
 
@@ -38,6 +41,21 @@ class MainWindow(QMainWindow):
         self.instructions_label.setWordWrap(True)
 
         # TODO: Create An HBox Layout with a QSpinBox that gets a whole number
+        input_hbox = QHBoxLayout()
+        tipbox_label = QLabel("Tip Percentage: ")
+        tipbox_spinbox = QSpinBox()
+        
+        # Set Spinbox properties
+        tipbox_spinbox.setMinimum(20)
+        tipbox_spinbox.setMaximum(200)
+
+        tipbox_spinbox.setSuffix("%")
+        tipbox_spinbox.setSingleStep(5)
+
+        # Add layout and label
+        input_hbox.addWidget(tipbox_label)
+        input_hbox.addWidget(tipbox_spinbox)
+
 
         # TODO: Create another HBox that gets a number with a decimal point
 
@@ -56,7 +74,8 @@ class MainWindow(QMainWindow):
         """
 
         # add widgets & layouts to main layout
-        layout.addWidget(self.instructions_label)
+        layout.addLayout(input_hbox)
+        # layout.addWidget(self.instructions_label)
 
         # [OPTIONAL] Add a stretch to move everything up
         layout.addStretch()
