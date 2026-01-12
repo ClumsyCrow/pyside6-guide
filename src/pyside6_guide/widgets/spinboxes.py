@@ -21,7 +21,7 @@ class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
 
-        self.setWindowTitle("Accurate Tip Addition")
+        self.setWindowTitle("Would you like to add a tip?")
         self.setContentsMargins(12, 12, 12, 12)
         self.resize(320, 240)
 
@@ -40,24 +40,35 @@ class MainWindow(QMainWindow):
         self.instructions_label = QLabel(self.instructions)
         self.instructions_label.setWordWrap(True)
 
-        # TODO: Create An HBox Layout with a QSpinBox that gets a whole number
+        # Feebox: Asks user how much money they spent
+        input_hbox2 = QHBoxLayout()
+        feebox_label = QLabel("Payment Fee: ")
+        feebox_spinbox = QDoubleSpinBox()
+
+        # Feebox: Set Feebox properties
+        feebox_spinbox.setMinimum(20)
+        feebox_spinbox.setMaximum(1000)
+
+        feebox_spinbox.setPrefix("$")
+        feebox_spinbox.setSingleStep(10)
+
+        # Tipbox: Asks user for Tip percentage
         input_hbox = QHBoxLayout()
         tipbox_label = QLabel("Tip Percentage: ")
         tipbox_spinbox = QSpinBox()
         
-        # Set Spinbox properties
+        # Tipbox: Set Spinbox properties
         tipbox_spinbox.setMinimum(20)
         tipbox_spinbox.setMaximum(200)
 
         tipbox_spinbox.setSuffix("%")
         tipbox_spinbox.setSingleStep(5)
 
-        # Add layout and label
+        # Tipbox: Add layout and label
         input_hbox.addWidget(tipbox_label)
         input_hbox.addWidget(tipbox_spinbox)
-
-
-        # TODO: Create another HBox that gets a number with a decimal point
+        input_hbox2.addWidget(feebox_label)
+        input_hbox2.addWidget(feebox_spinbox)
 
         # TODO: Add 2 buttons in an hbox: one for calculating & a clear button
 
@@ -74,7 +85,9 @@ class MainWindow(QMainWindow):
         """
 
         # add widgets & layouts to main layout
+        layout.addLayout(input_hbox2)
         layout.addLayout(input_hbox)
+        
         # layout.addWidget(self.instructions_label)
 
         # [OPTIONAL] Add a stretch to move everything up
