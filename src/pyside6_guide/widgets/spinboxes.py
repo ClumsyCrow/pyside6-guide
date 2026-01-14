@@ -75,6 +75,10 @@ class MainWindow(QMainWindow):
         clear_button = QPushButton("Clear")
         clear_button.clicked.connect(self.clear_board)
 
+        # Calculate Button: Uses values from both spinboxes to calculate tip cost
+        calc_button = QPushButton("Calculate")
+        calc_button.clicked.connect(self.calculate_tip)
+
         # TODO: Create an output label to display the instructions and results
 
         # TODO: Re-write the instructions to tell the user what to do.
@@ -90,6 +94,7 @@ class MainWindow(QMainWindow):
         # add widgets & layouts to main layout
         layout.addLayout(input_hbox2)
         layout.addLayout(input_hbox)
+        layout.addWidget(calc_button)
         layout.addWidget(clear_button)
         
         # layout.addWidget(self.instructions_label)
@@ -103,9 +108,18 @@ class MainWindow(QMainWindow):
         # Set the central widget of the Window.
         self.setCentralWidget(widget)
     
+    # Defines the "clear_board" function
     def clear_board(self):
         self.tipbox_spinbox.setValue(0)
         self.feebox_spinbox.setValue(0)
+    
+    # Defines the "calculate_tip" function
+    def calculate_tip(self):
+        mult = self.tipbox_spinbox.value()
+        mult = mult / 100
+        tip = self.feebox_spinbox.value() * mult
+        total_fee = self.feebox_spinbox.value() + tip
+        print(total_fee)
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
