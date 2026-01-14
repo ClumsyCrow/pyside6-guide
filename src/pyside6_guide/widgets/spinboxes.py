@@ -14,6 +14,7 @@ from PySide6.QtWidgets import (
     QWidget,
     QSpinBox,
     QDoubleSpinBox,
+    QPushButton,
 )
 
 
@@ -43,34 +44,36 @@ class MainWindow(QMainWindow):
         # Feebox: Asks user how much money they spent
         input_hbox2 = QHBoxLayout()
         feebox_label = QLabel("Payment Fee: ")
-        feebox_spinbox = QDoubleSpinBox()
+        self.feebox_spinbox = QDoubleSpinBox()
 
         # Feebox: Set Feebox properties
-        feebox_spinbox.setMinimum(20)
-        feebox_spinbox.setMaximum(1000)
+        self.feebox_spinbox.setMinimum(20)
+        self.feebox_spinbox.setMaximum(1000)
 
-        feebox_spinbox.setPrefix("$")
-        feebox_spinbox.setSingleStep(10)
+        self.feebox_spinbox.setPrefix("$")
+        self.feebox_spinbox.setSingleStep(10)
 
         # Tipbox: Asks user for Tip percentage
         input_hbox = QHBoxLayout()
         tipbox_label = QLabel("Tip Percentage: ")
-        tipbox_spinbox = QSpinBox()
+        self.tipbox_spinbox = QSpinBox()
         
         # Tipbox: Set Spinbox properties
-        tipbox_spinbox.setMinimum(20)
-        tipbox_spinbox.setMaximum(200)
+        self.tipbox_spinbox.setMinimum(20)
+        self.tipbox_spinbox.setMaximum(200)
 
-        tipbox_spinbox.setSuffix("%")
-        tipbox_spinbox.setSingleStep(5)
+        self.tipbox_spinbox.setSuffix("%")
+        self.tipbox_spinbox.setSingleStep(5)
 
         # Tipbox: Add layout and label
         input_hbox.addWidget(tipbox_label)
-        input_hbox.addWidget(tipbox_spinbox)
+        input_hbox.addWidget(self.tipbox_spinbox)
         input_hbox2.addWidget(feebox_label)
-        input_hbox2.addWidget(feebox_spinbox)
+        input_hbox2.addWidget(self.feebox_spinbox)
 
-        # TODO: Add 2 buttons in an hbox: one for calculating & a clear button
+        # Clear Button: Sets everything to the starting condition
+        clear_button = QPushButton("Clear")
+        clear_button.clicked.connect(self.clear_board)
 
         # TODO: Create an output label to display the instructions and results
 
@@ -87,6 +90,7 @@ class MainWindow(QMainWindow):
         # add widgets & layouts to main layout
         layout.addLayout(input_hbox2)
         layout.addLayout(input_hbox)
+        layout.addWidget(clear_button)
         
         # layout.addWidget(self.instructions_label)
 
@@ -98,7 +102,10 @@ class MainWindow(QMainWindow):
 
         # Set the central widget of the Window.
         self.setCentralWidget(widget)
-
+    
+    def clear_board(self):
+        self.tipbox_spinbox.setValue(0)
+        self.feebox_spinbox.setValue(0)
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
