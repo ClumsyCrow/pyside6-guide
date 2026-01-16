@@ -24,19 +24,11 @@ class MainWindow(QMainWindow):
 
         self.setWindowTitle("Would you like to add a tip?")
         self.setContentsMargins(12, 12, 12, 12)
-        self.resize(320, 240)
+        self.resize(350, 240)
 
         layout = QVBoxLayout()
-        self.instructions = "Make an app that gets two different numbers: "
-        self.instructions += "a whole number (integer) and a number with "
-        self.instructions += "a decimal point (float). Put them each in "
-        self.instructions += "a horizontal layout, and add two buttons: "
-        self.instructions += "one that gets then displays the inputs, and "
-        self.instructions += "one that resets the inputs and displays these "
-        self.instructions += "instructions\n\n"
-        self.instructions += "Feel free to modify these instructions once "
-        self.instructions += "you are done. Make sure the isntructions are "
-        self.instructions += "clear to the user as to what they should do."
+        self.instructions = "Enter your payment fee and how much you'd like to tip.\n"
+        self.instructions += "Tips are greatly appreciated and mandatory  :)"
 
         self.instructions_label = QLabel(self.instructions)
         self.instructions_label.setWordWrap(True)
@@ -79,9 +71,14 @@ class MainWindow(QMainWindow):
         calc_button = QPushButton("Calculate")
         calc_button.clicked.connect(self.calculate_tip)
 
-        # TODO: Create an output label to display the instructions and results
+        # Output Box: Outputs the final fee
+        output_hbox = QHBoxLayout()
+        output_label = QLabel("Total Fee: ")
+        self.output_value = QLabel("")
 
-        # TODO: Re-write the instructions to tell the user what to do.
+        # Output Box: Adds widgets to "output_hbox"
+        output_hbox.addWidget(output_label)
+        output_hbox.addWidget(self.output_value)
 
         """
         Challenge: make a simple calculator app that uses 2 inputs.
@@ -92,12 +89,12 @@ class MainWindow(QMainWindow):
         """
 
         # add widgets & layouts to main layout
+        layout.addWidget(self.instructions_label)
         layout.addLayout(input_hbox2)
         layout.addLayout(input_hbox)
         layout.addWidget(calc_button)
+        layout.addLayout(output_hbox)
         layout.addWidget(clear_button)
-        
-        # layout.addWidget(self.instructions_label)
 
         # [OPTIONAL] Add a stretch to move everything up
         layout.addStretch()
@@ -112,14 +109,15 @@ class MainWindow(QMainWindow):
     def clear_board(self):
         self.tipbox_spinbox.setValue(0)
         self.feebox_spinbox.setValue(0)
+        self.output_value.setText("")
     
     # Defines the "calculate_tip" function
     def calculate_tip(self):
-        mult = self.tipbox_spinbox.value()
-        mult = mult / 100
+        mult = self.tipbox_spinbox.value() / 100
         tip = self.feebox_spinbox.value() * mult
         total_fee = self.feebox_spinbox.value() + tip
-        print(total_fee)
+        self.output_value.setText("$" + str(total_fee))
+        
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
