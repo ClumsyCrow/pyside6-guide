@@ -74,7 +74,7 @@ class MainWindow(QMainWindow):
         # Output Box: Outputs the final fee
         output_hbox = QHBoxLayout()
         output_label = QLabel("Total Fee: ")
-        self.output_value = QLabel("")
+        self.output_value = QLabel("Tip not calculated")
 
         # Output Box: Adds widgets to "output_hbox"
         output_hbox.addWidget(output_label)
@@ -109,7 +109,7 @@ class MainWindow(QMainWindow):
     def clear_board(self):
         self.tipbox_spinbox.setValue(0)
         self.feebox_spinbox.setValue(0)
-        self.output_value.setText("")
+        self.output_value.setText("Tip not calculated")
     
     # Defines the "calculate_tip" function
     def calculate_tip(self):
