@@ -61,7 +61,15 @@ class MainWindow(QMainWindow):
         sweet_hbox.addWidget(self.sweet_input)
 
         ## Formatting Creamer ComboBox Layout
+        cream_hbox = QHBoxLayout()
+        cream_label = QLabel("Creamer Option: ")
+        self.cream_input = QComboBox()
+        self.cream_input.setEditable(False)
+        self.cream_input.addItems(["Normal Cream", "Half Cream", "No Cream"])
 
+        ### Adding Widgets to Layout
+        cream_hbox.addWidget(cream_label)
+        cream_hbox.addWidget(self.cream_input)
         
         ## Formatting Order Output Layout
 
@@ -70,6 +78,7 @@ class MainWindow(QMainWindow):
         layout.addLayout(customer_name_hbox)
         layout.addLayout(decaf_hbox)
         layout.addLayout(sweet_hbox)
+        layout.addLayout(cream_hbox)
         
         layout.addStretch()
         widget = QWidget()
