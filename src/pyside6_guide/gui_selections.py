@@ -50,7 +50,15 @@ class MainWindow(QMainWindow):
         decaf_hbox.addWidget(self.decaf_input)
 
         ## Formatting Sweetness ComboBox Layout
+        sweet_hbox = QHBoxLayout()
+        sweet_label = QLabel("Sugar Option: ")
+        self.sweet_input = QComboBox()
+        self.sweet_input.addItems(["Normal Sugar", "Half Sugar", "No Sugar"])
+        self.sweet_input.setEditable(False)
 
+        ### Adding Widgets to Layout
+        sweet_hbox.addWidget(sweet_label)
+        sweet_hbox.addWidget(self.sweet_input)
 
         ## Formatting Creamer ComboBox Layout
 
@@ -61,6 +69,7 @@ class MainWindow(QMainWindow):
         ## Compiling Layouts
         layout.addLayout(customer_name_hbox)
         layout.addLayout(decaf_hbox)
+        layout.addLayout(sweet_hbox)
         
         layout.addStretch()
         widget = QWidget()
