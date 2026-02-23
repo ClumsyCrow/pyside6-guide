@@ -11,7 +11,9 @@ from PySide6.QtWidgets import (
     QSlider,
     QSpinBox,
     QVBoxLayout,
+    QHBoxLayout,
     QWidget,
+    QLineEdit,
 )
 
 class MainWindow(QMainWindow):
@@ -29,8 +31,13 @@ class MainWindow(QMainWindow):
         title_label = QLabel("Coffee Shop")
 
         ## Formatting Customer Name Layout
+        customer_name_hbox = QHBoxLayout()
+        customer_name_label = QLabel("Your name: ")
+        self.customer_name_input = QLineEdit()
+        self.customer_name_input.setPlaceholderText("Enter your name")
 
-
+        customer_name_hbox.addWidget(customer_name_label)
+        customer_name_hbox.addWidget(self.customer_name_input)
         ## Formatting Decaf Option Layout
 
 
@@ -44,6 +51,13 @@ class MainWindow(QMainWindow):
 
         
         ## Compiling Layouts
+        layout.addLayout(customer_name_hbox)
+
+        
+        layout.addStretch()
+        widget = QWidget()
+        widget.setLayout(layout)
+        self.setCentralWidget(widget)
 
 
     # Methods and Functions go here
