@@ -25,7 +25,7 @@ class MainWindow(QMainWindow):
         ## Formatting the Main Window
         self.setWindowTitle("Coffee Order")
         self.setContentsMargins(12, 12, 12, 12)
-        self.resize(350, 240)
+        self.resize(270, 230)
 
         layout = QVBoxLayout()
         title_label = QLabel("Coffee Shop")
@@ -36,10 +36,18 @@ class MainWindow(QMainWindow):
         self.customer_name_input = QLineEdit()
         self.customer_name_input.setPlaceholderText("Enter your name")
 
+        ### Adding Widgets to Layout
         customer_name_hbox.addWidget(customer_name_label)
         customer_name_hbox.addWidget(self.customer_name_input)
-        ## Formatting Decaf Option Layout
 
+        ## Formatting Decaf Option Layout
+        decaf_hbox = QHBoxLayout()
+        decaf_label = QLabel("Non-caffeine Option: ")
+        self.decaf_input = QCheckBox()
+
+        ### Adding Widgets to Layout
+        decaf_hbox.addWidget(decaf_label)
+        decaf_hbox.addWidget(self.decaf_input)
 
         ## Formatting Sweetness ComboBox Layout
 
@@ -52,7 +60,7 @@ class MainWindow(QMainWindow):
         
         ## Compiling Layouts
         layout.addLayout(customer_name_hbox)
-
+        layout.addLayout(decaf_hbox)
         
         layout.addStretch()
         widget = QWidget()
