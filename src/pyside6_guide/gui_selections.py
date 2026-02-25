@@ -36,7 +36,7 @@ class MainWindow(QMainWindow):
         self.customer_name_input = QLineEdit()
         self.customer_name_input.setPlaceholderText("Enter your name")
 
-        ### Adding Widgets to Layout
+        ### Adding Widgets to customer_name_hbox
         customer_name_hbox.addWidget(customer_name_label)
         customer_name_hbox.addWidget(self.customer_name_input)
 
@@ -45,7 +45,7 @@ class MainWindow(QMainWindow):
         decaf_label = QLabel("Non-caffeine Option: ")
         self.decaf_input = QCheckBox()
 
-        ### Adding Widgets to Layout
+        ### Adding Widgets to decaf_hbox
         decaf_hbox.addWidget(decaf_label)
         decaf_hbox.addWidget(self.decaf_input)
 
@@ -56,7 +56,7 @@ class MainWindow(QMainWindow):
         self.sweet_input.addItems(["Normal Sugar", "Half Sugar", "No Sugar"])
         self.sweet_input.setEditable(False)
 
-        ### Adding Widgets to Layout
+        ### Adding Widgets to sweet_hbox
         sweet_hbox.addWidget(sweet_label)
         sweet_hbox.addWidget(self.sweet_input)
 
@@ -67,18 +67,31 @@ class MainWindow(QMainWindow):
         self.cream_input.setEditable(False)
         self.cream_input.addItems(["Normal Cream", "Half Cream", "No Cream"])
 
-        ### Adding Widgets to Layout
+        ### Adding Widgets to cream_hbox
         cream_hbox.addWidget(cream_label)
         cream_hbox.addWidget(self.cream_input)
-        
-        ## Formatting Order Output Layout
 
+        ## Formatting Order Layout
+        order_vbox = QVBoxLayout()
+
+        ### Formatting Order Button
+        order_button = QPushButton("Order")
+        order_button.clicked.connect(self.order)
+
+        ### Formatting Order Text
+        self.order_label = QLabel("Nothing ordered yet")
+        self.order_label.setWordWrap(True)
+
+        ### Adding Widgets to order_vbox
+        order_vbox.addWidget(order_button)
+        order_vbox.addWidget(self.order_label)
         
         ## Compiling Layouts
         layout.addLayout(customer_name_hbox)
         layout.addLayout(decaf_hbox)
         layout.addLayout(sweet_hbox)
         layout.addLayout(cream_hbox)
+        layout.addLayout(order_vbox)
         
         layout.addStretch()
         widget = QWidget()
@@ -87,6 +100,28 @@ class MainWindow(QMainWindow):
 
 
     # Methods and Functions go here
+
+    def caffeine_check(self):
+        if self.decaf_input.isChecked() == True:
+            return f"Non-caffeinated"
+        else:
+            return f"Caffeinated"
+
+    def order(self):
+        name = self.customer_name_input.text()
+        caffeine = self.caffeine_check()
+        sweet = self.sweet_input.currentText()
+        cream = self.cream_input.currentText()
+        full_order = ""
+
+        if name == "":
+            full_order = f"Please enter a name for your order"
+        else:
+            full_order = f"{name}'s order: {caffeine}, {sweet}, {cream}"
+
+        self.order_label.setText(full_order)
+
+    
 
     
 
