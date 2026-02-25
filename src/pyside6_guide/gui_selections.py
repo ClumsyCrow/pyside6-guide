@@ -4,12 +4,9 @@ from PySide6.QtWidgets import (
     QApplication,
     QCheckBox,
     QComboBox,
-    QDoubleSpinBox,
     QLabel,
     QMainWindow,
     QPushButton,
-    QSlider,
-    QSpinBox,
     QVBoxLayout,
     QHBoxLayout,
     QWidget,
@@ -120,10 +117,6 @@ class MainWindow(QMainWindow):
             full_order = f"{name}'s order: {caffeine}, {sweet}, {cream}"
 
         self.order_label.setText(full_order)
-
-    
-
-    
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
